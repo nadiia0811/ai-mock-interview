@@ -18,7 +18,7 @@ interface Feedback {
     role: string;
     level: string;
     questions: string[];
-    techstack: string[];
+    techStack: string[];
     createdAt: string;
     userId: string;
     type: string;
@@ -43,7 +43,7 @@ interface Feedback {
     userId?: string;
     role: string;
     type: string;
-    techstack: string[];
+    techStack: string[];
     createdAt?: string;
   }
   
