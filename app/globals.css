@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;  
+
 @import "tailwindcss";
 
 @plugin "tailwindcss-animate";
@@ -201,7 +205,7 @@
     }
 
     .input {
-      @apply !bg-dark-200 !rounded-full !min-h-12 !px-5 placeholder:!text-light-100;
+      @apply !bg-dark-200 !rounded-lg !min-h-12 !px-5 placeholder:!text-light-100;
     }
 
     .btn {
@@ -217,7 +221,7 @@
     }
 
     .card-interviewer {
-      @apply flex-center flex-col gap-2 p-7 h-[400px] blue-gradient-dark rounded-lg border-2 border-primary-200/50 flex-1 sm:basis-1/2 w-full;
+      @apply flex-center flex-col gap-2 p-7 h-[400px] blue-gradient-dark rounded-lg border-2 border-primary-200 flex-1 sm:basis-1/2 w-full;
     }
 
     .avatar {
