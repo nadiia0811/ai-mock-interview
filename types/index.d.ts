@@ -73,7 +73,7 @@ interface Feedback {
   
   interface SignInParams {
     email: string;
-    idToken: string | Promise<string>;
+    idToken: string;
   }
   
   interface SignUpParams {
