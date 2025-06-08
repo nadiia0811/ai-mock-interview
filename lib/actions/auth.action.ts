@@ -58,6 +58,11 @@ export async function signIn(params: SignInParams) {
     //@ts-ignore
     await setSessionCookie(idToken);
 
+    return {
+      success: true,
+      message: "Signed in successfully"
+    }
+  
   } catch (error) {
     console.log(error);
 
