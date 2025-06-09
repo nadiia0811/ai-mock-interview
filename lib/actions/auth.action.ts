@@ -51,9 +51,8 @@ export async function signIn(params: SignInParams) {
   const { email, idToken } = params;
 
   try {
-    let userRecord;
     try {
-     userRecord = await auth.getUserByEmail(email);  
+     await auth.getUserByEmail(email);  
     } catch (err: unknown | FirebaseError) {
       if (err.code === 'auth/user-not-found') {
         return {
