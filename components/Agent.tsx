@@ -1,3 +1,5 @@
+"use client"
+
 import Image from 'next/image';
 import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
@@ -9,10 +11,10 @@ enum CallStatus {
     FINISHED = "FINISHED"
 }
 
-const Agent = ({userName, userId, type}: AgentProps) => {
+const Agent = ({ userName }: AgentProps) => {
   const isSpeaking = true;
   const [callStatus, setCallStatus] = useState<CallStatus>(CallStatus.INACTIVE);
-  
+
   const messages = [
     "What is your name?",
     "My name is John Doe, nice to meet you!"
