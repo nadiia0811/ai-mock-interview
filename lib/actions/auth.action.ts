@@ -10,6 +10,7 @@ export async function signUp(params: SignUpParams) {
 
     try {
       const userRecord = await db.collection("users").doc(uid).get();
+      
       if (userRecord.exists) {
         return {
             success: false,
@@ -20,13 +21,13 @@ export async function signUp(params: SignUpParams) {
       await db.collection("users").doc(uid).set({
         name, email
       });
-
+      
       return {
         success: true,
         message: "Account created successfully. Please sign in.",
       };
 
-    } catch (error: unknown) {
+    } catch (error: unknown | FirebaseError) {
         console.error("Error creating a user: ", error);
 
         //Handling Firebase-specific errors
@@ -50,22 +51,25 @@ export async function signIn(params: SignInParams) {
   const { email, idToken } = params;
 
   try {
-    const userRecord = await auth.getUserByEmail(email);
-
-    if (!userRecord) {
-      return {
-        success: false,
-        message: "User does not exist. Create an account instead"
+    let userRecord;
+    try {
+     userRecord = await auth.getUserByEmail(email);  
+    } catch (err: unknown | FirebaseError) {
+      if (err.code === 'auth/user-not-found') {
+        return {
+          success: false,
+          message: "User does not exist. Create an account instead"
+        }
       }
+      throw err;
     }
-
+   
     await setSessionCookie(idToken);
 
     return {
       success: true,
       message: "Signed in successfully"
-    }
-  
+    }  
   } catch (error) {
     console.log(error);
 
