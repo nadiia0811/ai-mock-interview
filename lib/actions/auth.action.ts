@@ -2,6 +2,8 @@
 
 import { auth, db } from "@/firebase/admin";
 import { cookies } from "next/headers";
+import { FirebaseError } from "firebase/app";
+
 
 export async function signUp(params: SignUpParams) {
     const { uid, name, email } = params;
@@ -24,17 +26,19 @@ export async function signUp(params: SignUpParams) {
         message: "Account created successfully. Please sign in.",
       };
 
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error("Error creating a user: ", error);
 
         //Handling Firebase-specific errors
-        if (error.code === "auth/email-already-exists") {
+        if (error instanceof FirebaseError) {
+          if (error.code === "auth/email-already-exists") {
             return {
                 success: false,
                 message: "This email is already in use"
             }
+          }
         }
-
+        
         return {
             success: false,
             message: "Failed to create an account"
@@ -55,7 +59,6 @@ export async function signIn(params: SignInParams) {
       }
     }
 
-    //@ts-ignore
     await setSessionCookie(idToken);
 
     return {
