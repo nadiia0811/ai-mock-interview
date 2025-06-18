@@ -116,7 +116,7 @@ export async function getCurrentUser(): Promise<User | null> {
    }
 
    try {
-     const decodedClaims = await auth.verifySessionCookie(sessionCookie, true);
+     const decodedClaims = await auth.verifySessionCookie(sessionCookie);
      const userRecord = await db.collection("users").doc(decodedClaims.uid).get(); 
 
      if (!userRecord.exists) {
@@ -137,7 +137,7 @@ export async function getCurrentUser(): Promise<User | null> {
          id: "gjvemyeiItgM4TeNSYRUa7YvEYr1"
        } as User;
    }
-}
+}  
 
 export async function isAuthenticated() {
   const user = await getCurrentUser();
@@ -155,5 +155,5 @@ export async function getInterviewsByUserId(userId: string): Promise<Interview[]
     id: doc.id,
     ...doc.data()
   })) as Interview[]
-}
+} 
 
