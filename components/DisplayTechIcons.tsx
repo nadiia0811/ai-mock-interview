@@ -4,6 +4,10 @@ import Image from 'next/image';
 
 
 const DisplayTechIcons = async({ techStack } : TechIconProps) => {
+  if (!techStack) {
+    techStack = ["React", "Node.js", "Next.js"];
+  }
+
   const techIcons = await getTechLogos(techStack);
   
   return (
