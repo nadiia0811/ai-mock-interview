@@ -18,11 +18,12 @@ interface Feedback {
     role: string;
     level: string;
     questions: string[];
-    techStack: string[];
+    techstack: string[];
     createdAt: string;
     userId: string;
     type: string;
     finalized: boolean;
+    coverImage: string; ///
   }
   
   interface CreateFeedbackParams {
@@ -43,7 +44,7 @@ interface Feedback {
     userId?: string;
     role: string;
     type: string;
-    techStack: string[];
+    techstack: string[];
     createdAt?: string;
   }
   
@@ -95,6 +96,6 @@ interface Feedback {
   }
   
   interface TechIconProps {
-    techStack: string[];
+    techstack: string[];
   }
   

@@ -7,14 +7,15 @@ import Link from "next/link";
 import DisplayTechIcons from './DisplayTechIcons';
 
 const InterviewCard = ({
-    interviewId,
-    /* userId, */
+    id: interviewId,   
+    userId, 
     role,
     type,
-    techStack,
+    techstack,
     createdAt
-}: InterviewCardProps) => {
+}: InterviewCardProps) => {   //refactor: rename all techStack to techstack for consistency with Firebase
 
+  
     const feedback = null as Feedback | null;
     const normalizedType = /mix/gi.test(type) ? "Mixed" : type;
     const formattedDate = dayjs(feedback?.createdAt || createdAt || Date.now())
@@ -52,7 +53,7 @@ const InterviewCard = ({
                     </p>
                 </div>
                 <div className="flex flex-row justify-between">
-                    <DisplayTechIcons techStack={techStack} />
+                    <DisplayTechIcons techstack={techstack} />
                     <Button className="btn-primary">
                         <Link href={
                             feedback ? `/interview/${interviewId}/feedback`
