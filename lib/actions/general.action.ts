@@ -1,8 +1,10 @@
+"use server"
+
 import { feedbackSchema } from "@/constants";
 import { db } from "@/firebase/admin";
 import { google } from "@ai-sdk/google";
 import { generateObject } from "ai";
-import { truncateSync } from "fs";
+
 
 export async function getInterviewById(interviewId: string): Promise<Interview | null> {
   const interview = await db 
@@ -13,7 +15,7 @@ export async function getInterviewById(interviewId: string): Promise<Interview |
    return interview.data() as Interview | null;
 }
 
-export async function getFeedback(params: CreateFeedbackParams) {
+export async function createFeedback(params: CreateFeedbackParams) {
   const { interviewId, userId, transcript } = params;
 
   try {
@@ -69,6 +71,10 @@ export async function getFeedback(params: CreateFeedbackParams) {
 
   } catch (err) {
     console.error("Error saving feedback: ", err);
+    return {
+      success: false,
+      feedbackId: null
+    }
   }
 }
 
