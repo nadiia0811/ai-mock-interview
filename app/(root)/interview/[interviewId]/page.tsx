@@ -13,7 +13,7 @@ const Page = async ({ params }: RouteParams) => {
   const {
     role,
     type,
-    techstack: techStack,
+    techstack,
     questions,
     userId,
   } = interview as Interview;
@@ -35,7 +35,7 @@ const Page = async ({ params }: RouteParams) => {
               className="rounded-full object-cover size-[40px]"
             />
             <h3 className="capitalized">{role} Interview</h3>
-            <DisplayTechIcons techStack={techStack} />
+            <DisplayTechIcons techstack={techstack} />
           </div>
           <p className="bg-dark-200 px-4 py-2 rounded-lg h-fit capitalized">
             {type}
